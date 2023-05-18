@@ -4,6 +4,7 @@ Variables
 ======
 */
 :root {
+	--orange: #ff9900;
 	--primaryLightColor: #d4e6a5;
 	--primaryColor: #476a2e;
 	--primaryDarkColor: #c02c03;
@@ -104,9 +105,10 @@ Buttons
 	color: var(--primaryColor);
 }
 .btn-primary {
-	background: var(--primaryColor);
-	color: var(--mainWhite);
+	background: var(--orange);
+	color: var(--mainBlack);
 	border-color: transparent;
+	font-weight: bold;
 }
 .btn-primary:hover {
 	background: var(--primaryLightColor);
@@ -163,11 +165,30 @@ Navbar
 	transition: var(--mainTransition);
 }
 .nav-links a:hover {
+	color: var(--orange);
+}
+
+.link {
+	text-decoration: underline;
+	color: var(--orange);
+}
+
+.link:hover {
+	color: red;
+}
+
+.first-word {
+	font-size: 2rem;
+	color: var(--orange);
+	font-weight: bold;
+}
+
+.second-word {
+	font-size: 2rem;
 	color: var(--primaryColor);
+	/* font-weight: bold; */
 }
-.logo {
-	width: 12rem;
-}
+
 /* 
 ====== 
 About
@@ -212,6 +233,7 @@ Cocktails List
 	text-align: center;
 	margin-bottom: 3.5rem;
 	margin-top: 1rem;
+	color: var(--primaryColor);
 }
 .cocktails-center {
 	width: var(--smallWidth);
@@ -359,7 +381,7 @@ Cocktail
 	height: 4em;
 }
 .loader {
-	color: var(--primaryColor);
+	color: var(--orange);
 	text-indent: -9999em;
 	margin: 88px auto;
 	margin-top: 20rem;
