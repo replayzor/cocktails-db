@@ -1,4 +1,10 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import {
+	BrowserRouter,
+	Route,
+	RouterProvider,
+	Routes,
+	createBrowserRouter,
+} from "react-router-dom";
 
 // pages
 import Home from "./pages/Home";
@@ -8,6 +14,13 @@ import Error from "./pages/Error";
 
 // components
 import Navbar from "./components/Navbar";
+
+// const router = createBrowserRouter([
+// 	{ path: "/", element: <Home /> },
+// 	{ path: "/about", element: <About /> },
+// 	{ path: "/cocktail/:cocktailId", element: <SingleCocktails /> },
+// 	{ path: "*", element: <Error /> },
+// ]);
 
 function App() {
 	return (
