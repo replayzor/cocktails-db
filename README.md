@@ -1,3 +1,5 @@
+# [LIVE SITE](https://cocktails-db-nu.vercel.app/)
+
 # Cocktails Database Project
 
 This project is a Cocktails Database web application that allows users to search for information about various cocktails. It utilizes the [TheCocktailDB](https://www.thecocktaildb.com/) API to fetch cocktail data.
