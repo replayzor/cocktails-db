@@ -1,11 +1,7 @@
-/* eslint-disable no-undef */
-/* eslint-disable no-unused-vars */
-/* eslint-disable react-refresh/only-export-components */
-/* eslint-disable react/prop-types */
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { createContext, useContext } from "react";
-import axios from "axios";
 import { useQuery } from "react-query";
+import axios from "axios";
 
 const url = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=";
 

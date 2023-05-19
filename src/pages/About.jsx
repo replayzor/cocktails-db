@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unescaped-entities */
 const About = () => {
 	return (
 		<section className="section about-section">

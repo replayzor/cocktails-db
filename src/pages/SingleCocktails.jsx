@@ -4,6 +4,8 @@ import { Link, useParams } from "react-router-dom";
 
 // components
 import Loading from "../components/Loading";
+
+// pages
 import Error from "./Error";
 
 const url = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=";
