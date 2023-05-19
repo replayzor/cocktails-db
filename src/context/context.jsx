@@ -47,10 +47,18 @@ export const AppProvider = ({ children }) => {
 
 	useEffect(() => {
 		fetchDrinks();
-	}, []);
+	}, [searchTerm]);
 
 	return (
-		<AppContext.Provider value={{ loading, cocktails }}>
+		<AppContext.Provider
+			value={{
+				loading,
+				cocktails,
+				setSearchTerm,
+				searchTerm,
+				setCocktails,
+			}}
+		>
 			{children}
 		</AppContext.Provider>
 	);
