@@ -5,13 +5,13 @@ import Loading from "../components/Loading";
 import Cocktail from "./Cocktail";
 
 const CocktailList = () => {
-	const { loading, cocktails } = useGlobalContext();
+	const { data, isLoading } = useGlobalContext();
 
-	if (loading) {
+	if (isLoading) {
 		return <Loading />;
 	}
 
-	if (cocktails.length < 1) {
+	if (data.length < 1) {
 		return (
 			<h2 className="section-title">
 				no cocktails matched your search criteria
@@ -23,7 +23,7 @@ const CocktailList = () => {
 		<section className="section">
 			<h2 className="section-title">cocktails</h2>
 			<div className="cocktails-center">
-				{cocktails.map((item) => {
+				{data.map((item) => {
 					return <Cocktail key={item.id} {...item} />;
 				})}
 			</div>

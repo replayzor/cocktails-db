@@ -1,15 +1,20 @@
 import { Link } from "react-router-dom";
+import { useGlobalContext } from "../context/context";
 
 const Error = () => {
-	return (
-		<section className="error-page section">
-			<div className="error-container">
-				<h1>opps! no page found</h1>
-				<Link to="/" className="btn btn-primary">
-					back home
-				</Link>
-			</div>
-		</section>
-	);
+	const { isError } = useGlobalContext();
+
+	if (!isError) {
+		return (
+			<section className="error-page section">
+				<div className="error-container">
+					<h1>opps! no page found</h1>
+					<Link to="/" className="btn btn-primary">
+						back home
+					</Link>
+				</div>
+			</section>
+		);
+	}
 };
 export default Error;
