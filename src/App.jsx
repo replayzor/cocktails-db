@@ -1,26 +1,36 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 // pages
 import Home from "./pages/Home";
 import About from "./pages/About";
 import SingleCocktails from "./pages/SingleCocktails";
 import Error from "./pages/Error";
+import RootLayout from "./pages/RootLayout";
 
-// components
-import Navbar from "./components/Navbar";
+const router = createBrowserRouter([
+	{
+		path: "/",
+		element: <RootLayout />,
+		errorElement: <Error />,
+		children: [
+			{
+				path: "/",
+				element: <Home />,
+			},
+			{
+				path: "about",
+				element: <About />,
+			},
+			{
+				path: "cocktail/:cocktailId",
+				element: <SingleCocktails />,
+			},
+		],
+	},
+]);
 
 function App() {
-	return (
-		<BrowserRouter>
-			<Navbar />
-			<Routes>
-				<Route path="/" element={<Home />} />
-				<Route path="about" element={<About />} />
-				<Route path="cocktail/:cocktailId" element={<SingleCocktails />} />
-				<Route path="*" element={<Error />} />
-			</Routes>
-		</BrowserRouter>
-	);
+	return <RouterProvider router={router} />;
 }
 
 export default App;
