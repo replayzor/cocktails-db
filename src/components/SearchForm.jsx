@@ -1,13 +1,11 @@
 import { useEffect, useRef } from "react";
-import { useGlobalContext } from "../context/context";
 
 const SearchForm = () => {
-	const { setSearchTerm } = useGlobalContext();
 	const searchValue = useRef(null);
 
-	const searchCocktail = () => {
-		setSearchTerm(searchValue.current.value);
-	};
+	// const searchCocktail = () => {
+	// 	setSearchTerm(searchValue.current.value);
+	// };
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -27,7 +25,7 @@ const SearchForm = () => {
 						id="name"
 						name="name"
 						ref={searchValue}
-						onChange={searchCocktail}
+						// onChange={searchCocktail}
 					/>
 				</div>
 			</form>

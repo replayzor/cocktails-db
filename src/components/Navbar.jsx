@@ -1,23 +1,28 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import Wrapper from "../assets/wrappers/NavBar";
 
 const Navbar = () => {
 	return (
-		<nav className="navbar">
+		<Wrapper>
 			<div className="nav-center">
 				<Link to="/">
 					<span className="first-word">Cocktails</span>
-					<span className="second-word">Database</span>
+					<span className="logo">Database</span>
 				</Link>
-				<ul className="nav-links">
-					<li>
-						<Link to="/">Home</Link>
-					</li>
-					<li>
-						<Link to="/about">About</Link>
-					</li>
-				</ul>
+				<div className="nav-links">
+					<NavLink to="/" className="nav-link">
+						Home
+					</NavLink>
+					<NavLink to="about" className="nav-link">
+						About
+					</NavLink>
+					<NavLink to="newsletter" className="nav-link">
+						Newsletter
+					</NavLink>
+				</div>
 			</div>
-		</nav>
+		</Wrapper>
 	);
 };
+
 export default Navbar;

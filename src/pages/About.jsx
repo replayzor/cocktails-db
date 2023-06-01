@@ -1,7 +1,9 @@
+import Wrapper from "../assets/wrappers/AboutPage";
+
 const About = () => {
 	return (
-		<section className="section about-section">
-			<h1 className="section-title">about us</h1>
+		<Wrapper>
+			<h3>about us</h3>
 			<p>
 				"Welcome to Cocktails Database! We are passionate about cocktails and
 				dedicated to providing you with a comprehensive collection of drink
@@ -20,7 +22,7 @@ const About = () => {
 				our database, discover new cocktail creations, and learn the art of
 				mixing drinks. Cheers to endless possibilities!"
 			</p>
-		</section>
+		</Wrapper>
 	);
 };
 export default About;

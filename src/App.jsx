@@ -1,11 +1,17 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 // pages
-import Home from "./pages/Home";
-import About from "./pages/About";
-import SingleCocktails from "./pages/SingleCocktails";
-import Error from "./pages/Error";
-import RootLayout from "./pages/RootLayout";
+import {
+	Home,
+	Error,
+	About,
+	Newsletter,
+	SingleCocktails,
+	RootLayout,
+	SinglePageError,
+} from "./pages";
+
+import { loader as homeLoader } from "./pages/Home";
 
 const router = createBrowserRouter([
 	{
@@ -14,16 +20,22 @@ const router = createBrowserRouter([
 		errorElement: <Error />,
 		children: [
 			{
-				path: "/",
+				index: true,
 				element: <Home />,
+				loader: homeLoader,
+				errorElement: <SinglePageError />,
+			},
+			{
+				path: "cocktail/:cocktailId",
+				element: <SingleCocktails />,
 			},
 			{
 				path: "about",
 				element: <About />,
 			},
 			{
-				path: "cocktail/:cocktailId",
-				element: <SingleCocktails />,
+				path: "newsletter",
+				element: <Newsletter />,
 			},
 		],
 	},

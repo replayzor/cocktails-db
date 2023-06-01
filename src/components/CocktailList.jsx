@@ -1,33 +1,30 @@
-import { useGlobalContext } from "../context/context";
-
 // components
-import Loading from "../components/Loading";
+import Wrapper from "../assets/wrappers/CocktailList";
 import Cocktail from "./Cocktail";
 
-const CocktailList = () => {
-	const { data, isLoading } = useGlobalContext();
-
-	if (isLoading) {
-		return <Loading />;
+const CocktailList = ({ drinks }) => {
+	if (!drinks) {
+		return <h4 style={{ textAlign: "center" }}>No matching cocktails found</h4>;
 	}
 
-	if (data.length < 1) {
-		return (
-			<h2 className="section-title">
-				no cocktails matched your search criteria
-			</h2>
-		);
-	}
+	const formattedDrinks = drinks.map((item) => {
+		const { idDrink, strDrink, strDrinkThumb, strAlcoholic, strGlass } = item;
+
+		return {
+			id: idDrink,
+			name: strDrink,
+			image: strDrinkThumb,
+			info: strAlcoholic,
+			glass: strGlass,
+		};
+	});
 
 	return (
-		<section className="section">
-			<h2 className="section-title">cocktails</h2>
-			<div className="cocktails-center">
-				{data.map((item) => {
-					return <Cocktail key={item.id} {...item} />;
-				})}
-			</div>
-		</section>
+		<Wrapper>
+			{formattedDrinks.map((item) => {
+				return <Cocktail key={item.id} {...item} />;
+			})}
+		</Wrapper>
 	);
 };
 export default CocktailList;
