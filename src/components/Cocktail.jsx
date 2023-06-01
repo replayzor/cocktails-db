@@ -1,20 +1,21 @@
 import { Link } from "react-router-dom";
+import Wrapper from "../assets/wrappers/Cocktail";
 
 const Cocktail = ({ id, name, glass, info, image }) => {
 	return (
-		<article className="cocktail" key={id}>
+		<Wrapper key={id}>
 			<div className="img-container">
-				<img src={image} alt={name} />
+				<img src={image} alt={name} className="img" />
 			</div>
-			<div className="cocktail-footer">
-				<h3>Name: {name}</h3>
-				<h4>Glass: {glass}</h4>
+			<div className="footer">
+				<h4>{name}</h4>
+				<h5>{glass}</h5>
 				<p>{info}</p>
-				<Link to={`/cocktail/${id}`} className="btn btn-primary btn-details">
+				<Link to={`/cocktail/${id}`} className="btn">
 					details
 				</Link>
 			</div>
-		</article>
+		</Wrapper>
 	);
 };
 export default Cocktail;
