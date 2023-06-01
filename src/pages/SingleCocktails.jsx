@@ -1,102 +1,84 @@
 import axios from "axios";
-import { useQuery } from "react-query";
-import { Link, useParams } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 
-// components
-import Loading from "../components/Loading";
-
-// pages
-import Error from "./Error";
+import Wrapper from "../assets/wrappers/SingleCocktailPage";
 
 const url = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=";
 
 const SingleCocktails = () => {
-	const { cocktailId } = useParams();
+	const { id, data } = useLoaderData();
 
-	const { data, isLoading } = useQuery({
-		queryKey: ["singleCocktail", cocktailId],
-		queryFn: async () => {
-			const result = await axios.get(`${url}${cocktailId}`);
-			const { drinks } = result.data;
+	const singleDrink = data.drinks[0];
 
-			return drinks;
-		},
-	});
+	const {
+		strDrink: name,
+		strDrinkThumb: image,
+		strAlcoholic: info,
+		strCategory: category,
+		strGlass: glass,
+		strInstructions: instructions,
+	} = singleDrink;
 
-	if (isLoading) {
-		return <Loading />;
-	}
+	const ingredients = Object.keys(singleDrink)
+		.filter(
+			(key) => key.startsWith("strIngredient") && singleDrink[key] !== null
+		)
+		.map((key) => singleDrink[key]);
+	console.log(ingredients);
 
-	if (!data || data.length === 0) {
-		return <Error />;
-	}
-
-	const drinkInfo = data.map((drink) => {
-		const {
-			idDrink: id,
-			strDrink: name,
-			strDrinkThumb: image,
-			strCategory: category,
-			strAlcoholic: info,
-			strGlass: glass,
-			strInstructions: instructions,
-			strIngredient1,
-			strIngredient2,
-			strIngredient3,
-			strIngredient4,
-			strIngredient5,
-		} = drink;
-		const ingredients = [
-			strIngredient1,
-			strIngredient2,
-			strIngredient3,
-			strIngredient4,
-			strIngredient5,
-		];
-
-		return (
-			<div key={id}>
-				<Link to="/" className="btn btn-primary">
+	return (
+		<Wrapper key={id}>
+			<header>
+				<Link to="/" className="btn">
 					back home
 				</Link>
-				<h2 className="section-title">{name}</h2>
-				<div className="drink">
-					<img src={image} alt={name} />
-					<div className="drink-info">
-						<p>
-							<span className="drink-data">Name:</span>
-							{name}
-						</p>
-						<p>
-							<span className="drink-data">Category:</span>
-							{category}
-						</p>
-						<p>
-							<span className="drink-data">Info:</span>
-							{info}
-						</p>
-						<p>
-							<span className="drink-data">Glass:</span>
-							{glass}
-						</p>
-						<p>
-							<span className="drink-data">Instructions:</span>
-							{instructions}
-						</p>
-						<p>
-							<span className="drink-data">Ingredients:</span>
-							{ingredients.map((ingredient, index) => {
-								return ingredient ? (
-									<span key={index}>{ingredient}, </span>
-								) : null;
-							})}
-						</p>
-					</div>
+				<h3>{name}</h3>
+			</header>
+			<div className="drink">
+				<img src={image} alt={name} className="img" />
+				<div className="drink-info">
+					<p>
+						<span className="drink-data">Name:</span>
+						{name}
+					</p>
+					<p>
+						<span className="drink-data">Category:</span>
+						{category}
+					</p>
+					<p>
+						<span className="drink-data">Info:</span>
+						{info}
+					</p>
+					<p>
+						<span className="drink-data">Glass:</span>
+						{glass}
+					</p>
+					<p>
+						<span className="drink-data">Ingredients:</span>
+						{ingredients.map((ingredient, index) => {
+							return (
+								<span key={index} className="ing">
+									{ingredient}
+									{index < ingredient.length - 1 ? "," : ""}
+								</span>
+							);
+						})}
+					</p>
+					<p>
+						<span className="drink-data">Instructions:</span>
+						{instructions}
+					</p>
 				</div>
 			</div>
-		);
-	});
-
-	return <section className="section cocktail-section">{drinkInfo}</section>;
+		</Wrapper>
+	);
 };
 export default SingleCocktails;
+
+export const loader = async ({ params }) => {
+	const { cocktailId } = params;
+	const response = await axios.get(`${url}${cocktailId}`);
+	const data = response.data;
+
+	return { cocktailId, data };
+};
