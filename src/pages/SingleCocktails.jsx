@@ -1,5 +1,5 @@
+import { Link, Navigate, useLoaderData } from "react-router-dom";
 import axios from "axios";
-import { Link, useLoaderData } from "react-router-dom";
 
 import Wrapper from "../assets/wrappers/SingleCocktailPage";
 
@@ -7,6 +7,8 @@ const url = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=";
 
 const SingleCocktails = () => {
 	const { id, data } = useLoaderData();
+
+	if (!data) return <Navigate to="/" />;
 
 	const singleDrink = data.drinks[0];
 
@@ -24,7 +26,6 @@ const SingleCocktails = () => {
 			(key) => key.startsWith("strIngredient") && singleDrink[key] !== null
 		)
 		.map((key) => singleDrink[key]);
-	console.log(ingredients);
 
 	return (
 		<Wrapper key={id}>
