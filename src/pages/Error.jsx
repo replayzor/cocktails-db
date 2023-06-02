@@ -1,6 +1,7 @@
 import { Link, useRouteError } from "react-router-dom";
 
 import errorImage from "../assets/not-found.svg";
+
 import Wrapper from "../assets/wrappers/ErrorPage";
 
 const Error = () => {

@@ -1,4 +1,5 @@
 import { Link, NavLink } from "react-router-dom";
+
 import Wrapper from "../assets/wrappers/NavBar";
 
 const Navbar = () => {

@@ -1,6 +1,6 @@
-// components
-import Wrapper from "../assets/wrappers/CocktailList";
 import Cocktail from "./Cocktail";
+
+import Wrapper from "../assets/wrappers/CocktailList";
 
 const CocktailList = ({ drinks }) => {
 	if (!drinks) {
