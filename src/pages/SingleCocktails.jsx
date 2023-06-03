@@ -2,11 +2,24 @@ import { Link, Navigate, useLoaderData } from "react-router-dom";
 import axios from "axios";
 
 import Wrapper from "../assets/wrappers/SingleCocktailPage";
+import { useQuery } from "@tanstack/react-query";
 
 const url = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=";
 
+const singleCocktailQuery = (cocktailId) => {
+	return {
+		queryKey: ["cocktail", cocktailId],
+		queryFn: async () => {
+			const { data } = await axios.get(`${url}${cocktailId}`);
+			// console.log(data);
+			return data;
+		},
+	};
+};
+
 const SingleCocktails = () => {
-	const { id, data } = useLoaderData();
+	const { cocktailId } = useLoaderData();
+	const { data } = useQuery(singleCocktailQuery(cocktailId));
 
 	if (!data) return <Navigate to="/" />;
 
@@ -28,7 +41,7 @@ const SingleCocktails = () => {
 		.map((key) => singleDrink[key]);
 
 	return (
-		<Wrapper key={id}>
+		<Wrapper key={cocktailId}>
 			<header>
 				<Link to="/" className="btn">
 					back home
@@ -76,10 +89,10 @@ const SingleCocktails = () => {
 };
 export default SingleCocktails;
 
-export const loader = async ({ params }) => {
-	const { cocktailId } = params;
-	const response = await axios.get(`${url}${cocktailId}`);
-	const data = response.data;
-
-	return { cocktailId, data };
-};
+export const loader =
+	(queryClient) =>
+	async ({ params }) => {
+		const { cocktailId } = params;
+		await queryClient.ensureQueryData(singleCocktailQuery(cocktailId));
+		return { cocktailId };
+	};
