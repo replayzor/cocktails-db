@@ -1,35 +1,25 @@
-import { useEffect, useRef } from "react";
+import { Form, useNavigation } from "react-router-dom";
+import Wrapper from "../assets/wrappers/SearchForm";
 
 const SearchForm = ({ searchTerm }) => {
-	const searchValue = useRef(null);
+	const navigation = useNavigation();
 
-	const searchCocktail = () => {
-		searchTerm(searchValue.current.value);
-	};
-
-	const handleSubmit = (e) => {
-		e.preventDefault();
-	};
-
-	useEffect(() => {
-		searchValue.current.focus();
-	}, []);
+	const isSubmitting = navigation.state === "submitting";
 
 	return (
-		<section className="section search">
-			<form className="search-form" onSubmit={handleSubmit}>
-				<div className="form-control">
-					<label htmlFor="name">search your favorite cocktail</label>
-					<input
-						type="text"
-						id="name"
-						name="name"
-						ref={searchValue}
-						onChange={searchCocktail}
-					/>
-				</div>
-			</form>
-		</section>
+		<Wrapper>
+			<Form className="form">
+				<input
+					type="search"
+					name="search"
+					className="form-input"
+					defaultValue={searchTerm}
+				/>
+				<button type="submit" className="btn" disabled={isSubmitting}>
+					{isSubmitting ? "searching..." : "search"}
+				</button>
+			</Form>
+		</Wrapper>
 	);
 };
 export default SearchForm;
